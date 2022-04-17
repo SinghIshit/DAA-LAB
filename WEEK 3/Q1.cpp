@@ -1,42 +1,28 @@
 #include<iostream>
 using namespace std;
 
-void swap(int *x, int *y)
+void insertion_sort(int A[],int n)
 {
-    int temp = *x;
-    *x = *y;
-    *y = temp;
-}
-
-void Selection_sort(int arr[],int n)
-{
-    int comp=0,swaps=0;
-    int i,j,pos=0,min=0;
-    for (i=0;i<n-1;i++)
+    int comparisions=0,shift=0;
+    int i, j, x;
+    for (i = 1; i < n; i++)
     {
-        min=arr[i];
-        pos=i;
-        for (j=i+1;j<n;j++)
+        j = i - 1;
+        x = A[i];
+        while (j > -1 && A[j] > x)
         {
-            comp++;
-            if (min>arr[j])
-            {
-                min=arr[j];
-                pos=j;
-            }
+            comparisions++;
+            A[j + 1] = A[j];
+            j--;
         }
-
-        if (pos!=i)
-        {
-           swap(&arr[pos],&arr[i]);
-           swaps++;
-        }   
-    } 
-    cout<<"Comparisions:"<<comp<<endl;
-    cout<<"Swaps:"<<swaps<<endl;
+        shift++;
+        A[j + 1] = x;
+    }
+    cout<<"Comparisions:"<<comparisions<<endl;
+    cout<<"Shift:"<<shift<<endl;
 
     for (int i=0;i<n;i++)
-           cout<<arr[i]<<" ";
+           cout<<A[i]<<" ";
 }
 int main()
 {
@@ -50,7 +36,7 @@ int main()
         for (int i=0;i<n;i++)
            cin>>arr[i];
 
-        Selection_sort(arr,n);
+        insertion_sort(arr,n);
 
     }
 
